@@ -9,7 +9,7 @@
         android:layout_height="30dp">
 
         <TextView
-            android:id="@+id/txt_titulo"
+            android:id="@+id/txtItemTitulo"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="10"
@@ -18,7 +18,7 @@
             android:text="Título"/>
 
         <ImageButton
-            android:id="@+id/btn_lido"
+            android:id="@+id/btnItemLido"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -32,14 +32,14 @@
         android:layout_height="30dp">
 
         <TextView
-            android:id="@+id/txt_data"
+            android:id="@+id/txtItemData"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:text="1 jan 2001"/>
 
         <TextView
-            android:id="@+id/txt_tempo"
+            android:id="@+id/txtItemTempo"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"

@@ -45,9 +45,9 @@ class NewsAdapter(
 
     companion object {
         data class ViewHolder(val view: View) {
-            val txtTitulo: TextView = view.findViewById(R.id.txt_titulo)
-            val txtData: TextView = view.findViewById(R.id.txt_data)
-            val txtTempo: TextView = view.findViewById(R.id.txt_tempo)
+            val txtTitulo: TextView = view.findViewById(R.id.txtItemTitulo)
+            val txtData: TextView = view.findViewById(R.id.txtItemData)
+            val txtTempo: TextView = view.findViewById(R.id.txtItemTempo)
         }
     }
 }

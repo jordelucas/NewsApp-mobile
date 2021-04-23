@@ -12,16 +12,16 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/txt_newsdata"
+            android:id="@+id/txtNewsViewData"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
-            android:id="@+id/txt_newstempo"
+            android:id="@+id/txtNewsViewTempo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:id="@+id/txt_newstitulo"
+            android:id="@+id/txtNewsViewTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="40sp"
@@ -30,7 +30,7 @@
             />
 
         <TextView
-            android:id="@+id/txt_newstexto"
+            android:id="@+id/txtNewsViewTexto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="lorem ipsum"
