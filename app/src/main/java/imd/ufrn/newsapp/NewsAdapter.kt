@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-import java.sql.Date
+import java.util.*
 
 class NewsAdapter(
     private var context: Context,
@@ -36,9 +36,9 @@ class NewsAdapter(
             holder = convertView.tag as ViewHolder
         }
 
-        holder.txtTitulo.text = "Título da notícia"
-        holder.txtData.text = Date.valueOf("01-01-2001").toString()
-        holder.txtTempo.text = "30min"
+        holder.txtTitulo.text = news.titulo
+        holder.txtData.text = news.data.toString()
+        holder.txtTempo.text = news.tempo.toString() + "min"
 
         return row
     }
