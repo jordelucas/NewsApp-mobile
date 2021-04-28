@@ -2,11 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    android:background="@drawable/shadow">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp">
+        android:layout_height="50dp">
 
         <TextView
             android:id="@+id/txtItemTitulo"
@@ -15,7 +17,9 @@
             android:layout_weight="10"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:text="Título"/>
+            android:text="Título"
+            android:paddingLeft="10dp"
+            android:gravity="center_vertical"/>
 
         <ImageButton
             android:id="@+id/btnItemLido"
@@ -29,21 +33,25 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="30dp">
+        android:layout_height="40dp">
 
         <TextView
             android:id="@+id/txtItemData"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:text="1 jan 2001"/>
+            android:text="1 jan 2001"
+            android:padding="5dp"
+            android:gravity="center"/>
 
         <TextView
             android:id="@+id/txtItemTempo"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:text="10min"/>
+            android:text="10min"
+            android:padding="5dp"
+            android:gravity="center"/>
 
     </LinearLayout>
 
