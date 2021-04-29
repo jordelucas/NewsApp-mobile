@@ -1,5 +1,6 @@
 package imd.ufrn.newsapp.Activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -19,7 +20,13 @@ class InitiationActivity : AppCompatActivity() {
         // optSignup = findViewById(R.id...)
     }
 
-    fun toLogin(view: View) {}
+    fun toLogin(view: View) {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+    }
 
-    fun toSignup(view: View) {}
+    fun toSignup(view: View) {
+        val intent = Intent(this, SignUpActivity::class.java)
+        startActivity(intent)
+    }
 }
