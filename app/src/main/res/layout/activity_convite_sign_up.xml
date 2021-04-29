@@ -67,4 +67,5 @@
         app:layout_constraintTop_toBottomOf="@+id/edTxtConvite"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="50dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
