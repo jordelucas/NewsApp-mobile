@@ -35,6 +35,7 @@
             android:layout_height="match_parent">
 
             <LinearLayout
+                android:id="@+id/layLogin"
                 android:orientation="horizontal"
                 android:weightSum="6"
                 android:layout_width="match_parent"
@@ -64,6 +65,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/laySignUp"
             android:orientation="vertical"
             android:layout_weight="1"
             android:layout_width="match_parent"
