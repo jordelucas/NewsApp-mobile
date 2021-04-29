@@ -9,32 +9,195 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="30dp"
+        android:paddingTop="50dp"
+        android:paddingBottom="30dp">
 
-        <TextView
-            android:id="@+id/txtNewsViewData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/txtNewsViewTempo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/txtNewsViewTitulo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            android:text="Título da notícia"
-            />
-
-        <TextView
-            android:id="@+id/txtNewsViewTexto"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="lorem ipsum"
-            />
+            android:orientation="horizontal"
+            android:weightSum="100"
+            android:baselineAligned="false">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="50"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/btn_rounded"
+                    android:elevation="2dp"
+                    android:src="@drawable/left"
+                    android:contentDescription="back button" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="50"
+                android:orientation="horizontal"
+                android:gravity="right"
+                tools:ignore="RtlHardcoded">
+
+                <ImageView
+                    android:layout_width="94dp"
+                    android:layout_height="45dp"
+                    android:src="@drawable/logo"
+                    android:contentDescription="newsapp logo" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="38dp"
+            android:gravity="right"
+            tools:ignore="RtlHardcoded">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginRight="11dp"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/calendar"
+                    android:contentDescription="calendar icon" />
+
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:text="13 jan 2021"
+                    android:textSize="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginRight="11dp"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/time"
+                    android:contentDescription="time icon" />
+
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:text="10 min read"
+                    android:textSize="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/view"
+                    android:contentDescription="time icon" />
+
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:text="35 visualizações"
+                    android:textSize="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtNewsViewTitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:text="Vestibulum consectetur ultricies nisl, a fermentum risus volutpat id."
+                />
+
+            <LinearLayout
+                android:layout_marginTop="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:src="@drawable/user"
+                    android:contentDescription="avatar" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/txtMainNome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:text="Victor Ferraz"
+                        android:textColor="#000"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtNewsViewTexto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Duis dictum efficitur leo, vitae imperdiet leo eleifend sed. Suspendisse nisl libero, hendrerit vitae nisi at, laoreet lobortis orci. Etiam vel aliquam felis. Morbi at sapien ut elit consectetur placerat nec vel nunc. Proin magna quam, viverra ut lorem et, mollis venenatis lorem. Nullam ornare arcu nec erat mollis placerat. Nunc nec felis tellus. Aliquam placerat sed neque non sollicitudin. Praesent efficitur ante vel feugiat imperdiet.
+
+Suspendisse tempor tortor leo, ut faucibus tellus euismod ac. Maecenas nulla nulla, ornare et vestibulum id, venenatis id lorem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris magna metus, venenatis ut felis sed, condimentum tristique purus. Suspendisse ac sagittis urna. Nunc vulputate ultricies tempor. Sed vel tellus eu tellus accumsan vulputate ut nec felis. Vestibulum elit lorem, pulvinar non consequat ut, efficitur eu lacus. Quisque laoreet tempor dolor. Curabitur vitae orci felis. Curabitur placerat, sem nec mattis faucibus, justo arcu semper felis, venenatis hendrerit tortor lectus sit amet mi. Nullam et ullamcorper mi, vel euismod sapien. Donec nec quam quis est gravida sollicitudin et ac quam.
+
+Aliquam non lacus purus. Vestibulum aliquam odio eget diam pharetra, nec malesuada ligula posuere. Cras lobortis, enim feugiat dapibus porttitor, augue nunc commodo diam, in tincidunt magna metus eu arcu. Quisque eu pellentesque augue, sit amet rutrum magna. Maecenas porta, turpis vel viverra facilisis, turpis eros venenatis turpis, ullamcorper blandit leo quam at erat. Etiam varius nec purus bibendum pharetra. Nunc vulputate urna at tempor euismod."
+                android:textSize="18sp"
+                />
+
+        </LinearLayout>
 
     </LinearLayout>
 
