@@ -25,7 +25,7 @@ class InitiationActivity : AppCompatActivity() {
         }
 
         laySignUp.setOnClickListener {
-            toSignup()
+            toConviteSignUp()
         }
     }
 
@@ -34,8 +34,8 @@ class InitiationActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun toSignup() {
-        val intent = Intent(this, SignUpActivity::class.java)
+    fun toConviteSignUp() {
+        val intent = Intent(this, ConviteSignUpActivity::class.java)
         startActivity(intent)
     }
 }
