@@ -39,17 +39,18 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun loginAuthentication() {
-        HTTPAuthenticationTask(
-            "https://localhost:3333/authentication",
-            edTxtEmail.text.toString(),
-            edTxtSenha.text.toString()
-        ).execute()
+        var task = HTTPAuthenticationTask(
+                "http://10.0.0.103:3333/authentication",
+                edTxtEmail.text.toString(),
+                edTxtSenha.text.toString()
+        )
+        task.execute()
     }
 
     class HTTPAuthenticationTask(
-        private var urlAddress: String,
-        private var email: String,
-        private var password: String
+            private var urlAddress: String,
+            private var email: String,
+            private var password: String
     ):
         AsyncTask<Int, Int, Unit>() {
 
@@ -70,32 +71,28 @@ class LoginActivity : AppCompatActivity() {
                 urlConnection.requestMethod = "POST"
                 urlConnection.doOutput = true
                 urlConnection.doInput = true
-                urlConnection.setChunkedStreamingMode(0)
+
+                Log.i(TAG, urlAddress)
+                Log.i(TAG, postData.toString())
 
                 // Fluxo de saída para a requisição (envio)
                 val out: OutputStream = BufferedOutputStream(urlConnection.outputStream)
-                val writer = BufferedWriter(
-                    OutputStreamWriter(
-                        out, "UTF-8"
-                    )
-                )
-
-                Log.i(TAG, postData.toString())
-
+                val writer = BufferedWriter(OutputStreamWriter(
+                        out, "UTF-8"))
                 writer.write(postData.toString())
                 writer.flush()
 
                 // Verificar conexão bem sucedida
                 val code = urlConnection.responseCode
-                if (code != 201) {
+                if (code != 200) {
                     throw IOException("Server response $code")
                 }
 
                 // Fluxo de entrada para a requisição (resposta)
                 val rd = BufferedReader(
-                    InputStreamReader(
-                        urlConnection.inputStream
-                    )
+                        InputStreamReader(
+                                urlConnection.inputStream
+                        )
                 )
 
                 val responseString = StringBuffer()
