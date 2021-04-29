@@ -1,5 +1,8 @@
 package imd.ufrn.newsapp.Activities
 
+import android.app.ProgressDialog
+import android.content.Context
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +11,8 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import imd.ufrn.newsapp.R
+import imd.ufrn.newsapp.User
+import org.json.JSONArray
 import org.json.JSONObject
 import java.io.*
 import java.net.HttpURLConnection
@@ -19,6 +24,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var edTxtSenha: TextView
     private lateinit var txtVoltar: Button
     private lateinit var btnLogin: ImageButton
+    private val TAG = "authTag"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +44,9 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun loginAuthentication() {
-        var task = HTTPAuthenticationTask(
+    private fun loginAuthentication() {
+        val task = HTTPAuthenticationTask(
+                this,
                 "http://10.0.0.103:3333/authentication",
                 edTxtEmail.text.toString(),
                 edTxtSenha.text.toString()
@@ -48,14 +55,44 @@ class LoginActivity : AppCompatActivity() {
     }
 
     class HTTPAuthenticationTask(
+            private var context: Context,
             private var urlAddress: String,
             private var email: String,
-            private var password: String
+            private var password: String,
     ):
         AsyncTask<Int, Int, Unit>() {
 
-        private val TAG = "authTag"
+        private lateinit var pd: ProgressDialog
+        private var response =  String()
 
+        override fun onPreExecute() {
+            super.onPreExecute()
+
+            pd = ProgressDialog(context)
+            pd.setTitle("Autenticação")
+            pd.setMessage("Aguarde...")
+            pd.show()
+        }
+
+        override fun onPostExecute(result: Unit?) {
+            super.onPostExecute(result)
+
+            pd.dismiss()
+
+            Log.i(TAG, response)
+            val responseData = JSONObject(response)
+
+            val id = responseData.getString("id")
+            val name = responseData.getString("name")
+
+            val intent = Intent(context, MainActivity::class.java)
+            intent.putExtra("id", id)
+            intent.putExtra("name", name)
+
+            context.startActivity(intent)
+        }
+
+        private val TAG = "authTag"
         override fun doInBackground(vararg params: Int?) {
             var urlConnection: HttpURLConnection? = null
 
@@ -101,7 +138,8 @@ class LoginActivity : AppCompatActivity() {
                     responseString.append(line + "\n")
                 }
 
-                Log.i(TAG, responseString.toString())
+                response = responseString.toString()
+                Log.i(TAG, response)
             }
 
             catch (e: Exception) {
@@ -109,7 +147,6 @@ class LoginActivity : AppCompatActivity() {
             } finally {
                 urlConnection?.disconnect()
             }
-
         }
 
     }
