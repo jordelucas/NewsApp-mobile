@@ -17,6 +17,7 @@ import org.json.JSONObject
 import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL
+import java.util.*
 
 class LoginActivity : AppCompatActivity() {
 
@@ -45,9 +46,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginAuthentication() {
+
         val task = HTTPAuthenticationTask(
                 this,
-                "http://10.0.0.103:3333/authentication",
+                "http://$10.0.0.103/authentication",
                 edTxtEmail.text.toString(),
                 edTxtSenha.text.toString()
         )
