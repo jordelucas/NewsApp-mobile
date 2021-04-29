@@ -73,6 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="50dp"
         android:baselineAligned="false"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:weightSum="100"
         app:layout_constraintTop_toBottomOf="@+id/edTxtSignUpSenha">
