@@ -25,6 +25,7 @@
             tools:ignore="UselessParent">
 
             <TextView
+                android:id="@+id/txtItemTitulo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Vestibulum consectetur ultricies nisl, a fermentum risus volutpat id."
@@ -52,6 +53,7 @@
                         android:contentDescription="calendar icon" />
 
                     <TextView
+                        android:id="@+id/txtItemData"
                         android:layout_marginLeft="5dp"
                         android:text="13 jan 2021"
                         android:textSize="12dp"
@@ -74,6 +76,7 @@
                         android:contentDescription="time icon" />
 
                     <TextView
+                        android:id="@+id/txtItemTempo"
                         android:layout_marginLeft="5dp"
                         android:text="10 min read"
                         android:textSize="12dp"

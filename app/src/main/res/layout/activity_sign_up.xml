@@ -67,30 +67,49 @@
         app:layout_constraintTop_toBottomOf="@+id/edTxtSignUpEmail"
         tools:layout_editor_absoluteX="0dp" />
 
-    <Button
-        android:id="@+id/txtConviteVoltar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="55dp"
-        android:background="@drawable/transparent_bg_bordered_button"
-        android:text="Voltar"
-        app:layout_constraintTop_toBottomOf="@+id/edTxtSignUpSenha"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="50dp" />
-
-    <ImageButton
-        android:id="@+id/btnConviteProximo"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
+    <LinearLayout
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="50dp"
-        android:background="@drawable/btn_rounded"
-        android:elevation="2dp"
-        android:src="@drawable/icon_right"
-        app:layout_constraintTop_toBottomOf="@+id/edTxtSignUpSenha"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="306dp"
-        android:layout_marginRight="50dp" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:weightSum="100"
+        app:layout_constraintTop_toBottomOf="@+id/edTxtSignUpSenha">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:gravity="center_vertical"
+            tools:ignore="UseCompoundDrawables">
+
+            <Button
+                android:id="@+id/btnSignUpVoltar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/transparent_bg_bordered_button"
+                android:text="Voltar"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:gravity="right">
+
+            <ImageButton
+                android:id="@+id/btnSignUpProximo"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:background="@drawable/btn_rounded"
+                android:elevation="2dp"
+                android:src="@drawable/icon_right" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
