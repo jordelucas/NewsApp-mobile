@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import imd.ufrn.newsapp.HTTPValidateConvite
 import imd.ufrn.newsapp.R
 
 class ConviteSignUpActivity : AppCompatActivity() {
@@ -37,7 +38,12 @@ class ConviteSignUpActivity : AppCompatActivity() {
     }
 
     fun check() {
-        //TODO
+        val task = HTTPValidateConvite(
+            this,
+            "http://10.0.0.103:3333/invitation/",
+            edTxtCodigo.text.toString()
+        )
+        task.execute()
     }
 
 }

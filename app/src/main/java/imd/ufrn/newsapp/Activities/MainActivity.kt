@@ -2,9 +2,7 @@ package imd.ufrn.newsapp.Activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.LinearLayout
-import android.widget.ListView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import imd.ufrn.newsapp.*
 
@@ -13,6 +11,7 @@ class MainActivity : AppCompatActivity(), HTTPGetNewsList.UpdateNewsListListener
 
     private lateinit var layLogout: LinearLayout
     private lateinit var txtName: TextView
+    private lateinit var btnGerarConvite: ImageButton
 
     private lateinit var adapter: NewsAdapter
     private var newsList = mutableListOf<News>()
@@ -24,10 +23,7 @@ class MainActivity : AppCompatActivity(), HTTPGetNewsList.UpdateNewsListListener
 
         layLogout = findViewById(R.id.content_logout)
         txtName = findViewById(R.id.txtMainNome)
-
-        layLogout.setOnClickListener {
-            logout()
-        }
+        btnGerarConvite = findViewById(R.id.btnGerarConvite)
 
         val userId = intent.getStringExtra("id")
         val userName = intent.getStringExtra("name")
@@ -50,6 +46,15 @@ class MainActivity : AppCompatActivity(), HTTPGetNewsList.UpdateNewsListListener
             )
             task.execute()
         }
+
+        btnGerarConvite.setOnClickListener {
+            generateConvite()
+            //Toast.makeText(this, "hehehe", Toast.LENGTH_SHORT).show()
+        }
+
+        layLogout.setOnClickListener {
+            logout()
+        }
     }
 
     override fun onResume() {
@@ -67,6 +72,15 @@ class MainActivity : AppCompatActivity(), HTTPGetNewsList.UpdateNewsListListener
     override fun updateNewsList(newsMList: MutableList<News>) {
         // adapter.updateList(newsMList)
         adapter.notifyDataSetChanged()
+    }
+
+    fun generateConvite() {
+        val task = HTTPGenerateConvite(
+            this,
+            "http://10.0.0.103:3333/invitation",
+            user.id
+        )
+        task.execute()
     }
 
     fun logout() {
