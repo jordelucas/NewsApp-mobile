@@ -1,6 +1,7 @@
 package imd.ufrn.newsapp.Activities
 
 import android.content.Context
+import android.content.Intent
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -41,13 +42,20 @@ class MainActivity : AppCompatActivity() {
         layLogout = findViewById(R.id.content_logout)
 
         layLogout.setOnClickListener {
-            finish()
+            logout()
         }
 
         adapter = NewsAdapter(this, newsList)
         val lvNews: ListView = findViewById(R.id.lvNews)
         lvNews.adapter = adapter
 
+    }
+
+    fun logout() {
+        val intent = Intent(this, InitiationActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent)
     }
 
     class HTTPGetNewsList(
