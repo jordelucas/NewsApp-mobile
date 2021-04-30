@@ -40,7 +40,7 @@ class ConviteSignUpActivity : AppCompatActivity() {
     fun check() {
         val task = HTTPValidateConvite(
             this,
-            "http://10.0.0.103:3333/invitation/",
+            "http://10.0.2.2:3333/invitation/",
             edTxtCodigo.text.toString()
         )
         task.execute()
