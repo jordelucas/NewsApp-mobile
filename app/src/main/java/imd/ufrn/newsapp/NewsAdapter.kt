@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import android.widget.Toast
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -42,6 +43,9 @@ class NewsAdapter(
         }
 
         holder.txtTitulo.text = news.titulo
+        /*holder.txtTitulo.setOnClickListener {
+            Toast.makeText(context, "$position: Funciona!", Toast.LENGTH_SHORT)
+        }*/
         // holder.txtData.text = news.data.toString()
         // holder.txtTempo.text = news.tempo.toString() + "min"
 

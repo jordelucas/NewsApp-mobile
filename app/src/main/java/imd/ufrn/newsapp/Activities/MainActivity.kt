@@ -1,13 +1,16 @@
 package imd.ufrn.newsapp.Activities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemClickListener
 import android.widget.ListView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import imd.ufrn.newsapp.*
 import java.io.*
 import java.util.*
-import kotlin.collections.ArrayList
+
 
 class MainActivity : AppCompatActivity(), HTTPGetNewsList.UpdateNewsListListener {
 
@@ -27,6 +30,17 @@ class MainActivity : AppCompatActivity(), HTTPGetNewsList.UpdateNewsListListener
         val lvNews: ListView = findViewById(R.id.lvNews)
         lvNews.adapter = adapter
 
+        lvNews.setOnItemClickListener {
+            parent, view, position, id ->
+            // Toast.makeText(this, "$position: Funciona!", Toast.LENGTH_SHORT).show()
+            val task = HTTPGetNewsById(
+                    this,
+                    "http://10.0.0.103:3333/news/",
+                    newsList.get(position).id,
+                    user.id
+            )
+            task.execute()
+        }
         val task = HTTPGetNewsList(
                 this,
                 "http://10.0.0.103:3333/user/",
