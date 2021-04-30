@@ -41,14 +41,18 @@ class MainActivity : AppCompatActivity(), HTTPGetNewsList.UpdateNewsListListener
             )
             task.execute()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
         val task = HTTPGetNewsList(
+                this,
                 this,
                 "http://10.0.0.103:3333/user/",
                 user.id,
                 newsList
         )
         task.execute()
-
     }
 
     override fun updateNewsList(newsMList: MutableList<News>) {

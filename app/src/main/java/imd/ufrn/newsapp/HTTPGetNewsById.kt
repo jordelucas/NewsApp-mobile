@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
 import android.util.Log
+import android.widget.Toast
 import imd.ufrn.newsapp.Activities.MainActivity
 import imd.ufrn.newsapp.Activities.NewsActivity
 import org.json.JSONArray
@@ -23,13 +24,18 @@ class HTTPGetNewsById(
 
         private var TAG = "mainTag"
         private var response = String()
+        private var error = String()
 
         override fun onPostExecute(result: Unit?) {
             super.onPostExecute(result)
 
+            if(!error.isEmpty()) {
+                Toast.makeText(context, "Opa! Há algo de errado", Toast.LENGTH_SHORT).show()
+                return
+            }
+
             Log.i(TAG, response)
             var responseData = JSONObject(response)
-
 
             val id = responseData.getString("id")
             val title = responseData.getString("title")
@@ -59,7 +65,8 @@ class HTTPGetNewsById(
                 // Verificar conexão bem sucedida
                 val code = urlConnection.responseCode
                 if (code != 200) {
-                    throw IOException("Server response $code")
+                    error = "$code"
+                    return
                 }
 
                 // Fluxo de entrada para a requisição (resposta)

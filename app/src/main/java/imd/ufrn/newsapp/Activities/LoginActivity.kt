@@ -9,6 +9,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import imd.ufrn.newsapp.R
 import imd.ufrn.newsapp.User
@@ -66,6 +67,7 @@ class LoginActivity : AppCompatActivity() {
 
         private lateinit var pd: ProgressDialog
         private var response = String()
+        private var error = String()
 
         override fun onPreExecute() {
             super.onPreExecute()
@@ -80,6 +82,17 @@ class LoginActivity : AppCompatActivity() {
             super.onPostExecute(result)
 
             pd.dismiss()
+
+            if(!error.isEmpty()) {
+                val msg: String
+                msg = when(error) {
+                    "400" -> "Campos obrigatórios incorretos ou não informados!"
+                    "404" -> "Usuário não encontrado"
+                    else -> "Há algo de errado!"
+                }
+                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+                return
+            }
 
             Log.i(TAG, response)
             val responseData = JSONObject(response)
@@ -124,7 +137,8 @@ class LoginActivity : AppCompatActivity() {
                 // Verificar conexão bem sucedida
                 val code = urlConnection.responseCode
                 if (code != 200) {
-                    throw IOException("Server response $code")
+                    error = "$code"
+                    return
                 }
 
                 // Fluxo de entrada para a requisição (resposta)

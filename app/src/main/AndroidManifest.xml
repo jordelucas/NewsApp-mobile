@@ -20,8 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.ConviteSignUpActivity" />
-        <activity android:name=".Activities.SignUpActivity">
-        </activity>
+        <activity android:name=".Activities.SignUpActivity"/>
         <activity android:name=".Activities.LoginActivity" />
         <activity android:name=".Activities.NewsActivity" />
         <activity android:name=".Activities.MainActivity"/>
