@@ -25,6 +25,8 @@ Clone o projeto e execute utilizando o Android Studio
 $ git clone https://github.com/jordelucas/NewsApp-mobile.git
 ```
 
+Clone também o projeto [**NewsApp-backend**](https://github.com/jordelucas/NewsApp-backend) 
+
 ## :ballot_box_with_check: Funcionalidades ##
 
 `Cadastro de usuários`   
