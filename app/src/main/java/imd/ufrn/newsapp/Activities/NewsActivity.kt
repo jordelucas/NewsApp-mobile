@@ -1,7 +1,9 @@
 package imd.ufrn.newsapp.Activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.TextView
 import imd.ufrn.newsapp.HTTPRead
 import imd.ufrn.newsapp.News
@@ -10,6 +12,7 @@ import imd.ufrn.newsapp.R
 class NewsActivity : AppCompatActivity() {
 
     // private lateinit var news: News
+    private lateinit var btnVoltar: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,16 +32,25 @@ class NewsActivity : AppCompatActivity() {
                 .text = intent.getStringExtra("views") + " visualizações"
 
         val userId = intent.getStringExtra("userId")
+
         val newsId = intent.getStringExtra("id")
+
+        btnVoltar = findViewById(R.id.btnViewNewsVoltar)
+
+        btnVoltar.setOnClickListener {
+            toBack()
+        }
 
         val task = HTTPRead(
                 this,
-                "http://10.0.0.103:3333/read",
+                "http://10.0.2.2:3333/read",
                 userId as String,
                 newsId as String
         )
         task.execute()
     }
 
-
+    fun toBack() {
+        finish()
+    }
 }
