@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity(), HTTPGetNewsList.UpdateNewsListListener
             // Toast.makeText(this, "$position: Funciona!", Toast.LENGTH_SHORT).show()
             val task = HTTPGetNewsById(
                     this,
-                    "http://10.0.0.103:3333/news/",
+                    "http://10.0.2.2:3333/news/",
                     newsList.get(position).id,
                     user.id
             )
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity(), HTTPGetNewsList.UpdateNewsListListener
         }
         val task = HTTPGetNewsList(
                 this,
-                "http://10.0.0.103:3333/user/",
+                "http://10.0.2.2:3333/user/",
                 user.id,
                 newsList
         )
