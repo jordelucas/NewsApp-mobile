@@ -25,7 +25,9 @@ Clone o projeto e execute utilizando o Android Studio
 $ git clone https://github.com/jordelucas/NewsApp-mobile.git
 ```
 
-Clone também o projeto [**NewsApp-backend**](https://github.com/jordelucas/NewsApp-backend) 
+Clone também o projeto [**NewsApp-backend**](https://github.com/jordelucas/NewsApp-backend) e siga as instruções para instalação das dependencias.
+
+Atenção: caso seja instalado o app no smartphone, pode ser necessário alterar as ocorrências da URL do servidor. Por padrão, foi adotado a 10.0.2.2:3333.
 
 ## :ballot_box_with_check: Funcionalidades ##
 
