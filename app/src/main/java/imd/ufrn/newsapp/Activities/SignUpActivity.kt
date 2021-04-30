@@ -10,6 +10,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import imd.ufrn.newsapp.R
 import org.json.JSONObject
 import java.io.*
@@ -38,7 +39,7 @@ class SignUpActivity : AppCompatActivity() {
         btnLogin = findViewById(R.id.btnSignUpProximo)
 
         btnVoltar.setOnClickListener {
-            toInitiation()
+            toInvitation()
         }
 
         btnLogin.setOnClickListener {
@@ -46,8 +47,8 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    fun toInitiation() {
-        val intent = Intent(this, InitiationActivity::class.java)
+    fun toInvitation() {
+        val intent = Intent(this, ConviteSignUpActivity::class.java)
         startActivity(intent)
     }
 
@@ -72,6 +73,7 @@ class SignUpActivity : AppCompatActivity() {
 
         private lateinit var pd: ProgressDialog
         private var response =  String()
+        private var error = String()
 
         override fun onPreExecute() {
             super.onPreExecute()
@@ -86,6 +88,17 @@ class SignUpActivity : AppCompatActivity() {
             super.onPostExecute(result)
 
             pd.dismiss()
+
+            if (error.length >= 0) {
+                when (error) {
+                    "400" -> Toast.makeText(context, "Informações inválidas!", Toast.LENGTH_SHORT).show()
+                    "409" -> Toast.makeText(context, "Email já em uso!", Toast.LENGTH_SHORT).show()
+                    else -> {
+                        Toast.makeText(context, "Há algo de errado!", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                return;
+            }
 
             Log.i("tt", response)
             val responseData = JSONObject(response)
@@ -127,7 +140,8 @@ class SignUpActivity : AppCompatActivity() {
 
                 val code = urlConnection.responseCode
                 if (code != 201) {
-                    throw IOException("Server response $code")
+                    error = "$code"
+                    return;
                 }
 
                 val rd = BufferedReader(
