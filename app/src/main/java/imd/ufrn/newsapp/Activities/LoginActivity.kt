@@ -12,13 +12,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import imd.ufrn.newsapp.R
-import imd.ufrn.newsapp.User
-import org.json.JSONArray
 import org.json.JSONObject
 import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL
-import java.util.*
 
 class LoginActivity : AppCompatActivity() {
 
@@ -66,8 +63,9 @@ class LoginActivity : AppCompatActivity() {
         AsyncTask<Int, Int, Unit>() {
 
         private lateinit var pd: ProgressDialog
-        private var response =  String()
+
         private var error = String()
+        private var response = String()
 
         override fun onPreExecute() {
             super.onPreExecute()

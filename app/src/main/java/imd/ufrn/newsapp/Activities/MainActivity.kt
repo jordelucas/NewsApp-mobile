@@ -1,39 +1,20 @@
 package imd.ufrn.newsapp.Activities
 
-import android.content.Context
 import android.content.Intent
-import android.os.AsyncTask
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.LinearLayout
 import android.widget.ListView
-import imd.ufrn.newsapp.News
-import imd.ufrn.newsapp.NewsAdapter
-import imd.ufrn.newsapp.R
-import org.json.JSONObject
-import java.io.*
-import java.net.HttpURLConnection
-import java.net.URL
-import java.util.*
+import androidx.appcompat.app.AppCompatActivity
+import imd.ufrn.newsapp.*
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : AppCompatActivity(), HTTPGetNewsList.UpdateNewsListListener {
 
     private lateinit var layLogout: LinearLayout
 
     private lateinit var adapter: NewsAdapter
     private var newsList = mutableListOf<News>()
-
-
-    /*val newsListTest = mutableListOf(
-            News("Notícia 1", "Este é o corpo da primeira notícia", Date(), 1),
-            News("Notícia 2", "Este é o corpo da segunda notícia", Date(), 1),
-            News("Notícia 3", "Este é o corpo da terceira notícia", Date(), 1),
-            News("Notícia 4", "Este é o corpo da quarta notícia", Date(), 1),
-            News("Notícia 5", "Este é o corpo da quinta notícia", Date(), 1),
-            News("Notícia 6", "Este é o corpo da sexta notícia", Date(), 1),
-            News("Notícia 7", "Este é o corpo da sétima notícia", Date(), 1)
-    )*/
+    private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,10 +26,38 @@ class MainActivity : AppCompatActivity() {
             logout()
         }
 
+        val userId = intent.getStringExtra("id")
+        val userName = intent.getStringExtra("name")
+        user = User(userId as String, userName as String)
+
         adapter = NewsAdapter(this, newsList)
         val lvNews: ListView = findViewById(R.id.lvNews)
         lvNews.adapter = adapter
 
+        lvNews.setOnItemClickListener {
+            parent, view, position, id ->
+            // Toast.makeText(this, "$position: Funciona!", Toast.LENGTH_SHORT).show()
+            val task = HTTPGetNewsById(
+                    this,
+                    "http://10.0.0.103:3333/news/",
+                    newsList.get(position).id,
+                    user.id
+            )
+            task.execute()
+        }
+        val task = HTTPGetNewsList(
+                this,
+                "http://10.0.0.103:3333/user/",
+                user.id,
+                newsList
+        )
+        task.execute()
+
+    }
+
+    override fun updateNewsList(newsMList: MutableList<News>) {
+        // adapter.updateList(newsMList)
+        adapter.notifyDataSetChanged()
     }
 
     fun logout() {
@@ -56,73 +65,5 @@ class MainActivity : AppCompatActivity() {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent)
-    }
-
-    class HTTPGetNewsList(
-            private var context: Context,
-            private var urlAddress: String,
-            private var userId: String
-    ): AsyncTask<Int, Int, Unit>() {
-
-        private var TAG = "mainTag"
-        private var response = String()
-
-        override fun onPostExecute(result: Unit?) {
-            super.onPostExecute(result)
-
-            // A fazer
-            // Parser
-        }
-
-        override fun doInBackground(vararg params: Int?) {
-            var urlConnection: HttpURLConnection? = null
-
-            try {
-                val getData = JSONObject()
-                getData.put("user_id", userId)
-
-                val url = URL(urlAddress)
-                urlConnection = url.openConnection() as HttpURLConnection
-
-                Log.i(TAG, urlAddress)
-                Log.i(TAG, getData.toString())
-
-                // Fluxo de saída para a requisição (envio)
-                val out: OutputStream = BufferedOutputStream(urlConnection.outputStream)
-                val writer = BufferedWriter(OutputStreamWriter(
-                        out, "UTF-8"))
-                writer.write(getData.toString())
-                writer.flush()
-
-                // Verificar conexão bem sucedida
-                val code = urlConnection.responseCode
-                if (code != 200) {
-                    throw IOException("Server response $code")
-                }
-
-                // Fluxo de entrada para a requisição (resposta)
-                val rd = BufferedReader(
-                        InputStreamReader(
-                                urlConnection.inputStream
-                        )
-                )
-
-                val responseString = StringBuffer()
-                var line: String?
-                while (rd.readLine().also { line = it } != null) {
-                    responseString.append(line + "\n")
-                }
-
-                response = responseString.toString()
-                Log.i(TAG, response)
-            }
-
-            catch (e: Exception) {
-                e.printStackTrace();
-            } finally {
-                urlConnection?.disconnect()
-            }
-        }
-
     }
 }
