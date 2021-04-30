@@ -66,7 +66,6 @@ class LoginActivity : AppCompatActivity() {
 
         private var error = String()
         private var response = String()
-        private var error = String()
 
         override fun onPreExecute() {
             super.onPreExecute()
