@@ -42,9 +42,9 @@ class HTTPGetNewsList(
             val title = responseData.getString("title")
             val date = responseData.getString("created_at")
             // val user_id = responseData.getString("id")
-            // val created_at = responseData.getString("created_at")
+            val time = responseData.getString("time_to_read")
 
-            val news = News(id, title, null, date, null)
+            val news = News(id, title, null, date, null, time)
             newsMList.add(news)
         }
 

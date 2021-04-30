@@ -47,7 +47,7 @@ class NewsAdapter(
             Toast.makeText(context, "$position: Funciona!", Toast.LENGTH_SHORT)
         }*/
          holder.txtData.text = news.date.toString()
-        // holder.txtTempo.text = news.tempo.toString() + "min"
+         holder.txtTempo.text = news.time.toString() + " min read"
 
         return row
     }
