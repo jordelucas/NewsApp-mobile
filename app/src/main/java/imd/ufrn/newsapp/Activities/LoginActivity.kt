@@ -9,6 +9,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import imd.ufrn.newsapp.R
 import imd.ufrn.newsapp.User
@@ -49,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
 
         val task = HTTPAuthenticationTask(
                 this,
-                "http://$10.0.0.103/authentication",
+                "http://10.0.2.2:3333/authentication",
                 edTxtEmail.text.toString(),
                 edTxtSenha.text.toString()
         )
@@ -66,6 +67,7 @@ class LoginActivity : AppCompatActivity() {
 
         private lateinit var pd: ProgressDialog
         private var response =  String()
+        private var error = String()
 
         override fun onPreExecute() {
             super.onPreExecute()
@@ -80,6 +82,18 @@ class LoginActivity : AppCompatActivity() {
             super.onPostExecute(result)
 
             pd.dismiss()
+
+            if (!error.isEmpty()) {
+                Log.i(TAG, "oi")
+                when (error) {
+                    "400" -> Toast.makeText(context, "Campos obrigatórios incorretos ou não informados!", Toast.LENGTH_SHORT).show()
+                    "404" -> Toast.makeText(context, "Credenciais inválidas!", Toast.LENGTH_SHORT).show()
+                    else -> {
+                        Toast.makeText(context, "Há algo de errado!", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                return;
+            }
 
             Log.i(TAG, response)
             val responseData = JSONObject(response)
@@ -124,7 +138,8 @@ class LoginActivity : AppCompatActivity() {
                 // Verificar conexão bem sucedida
                 val code = urlConnection.responseCode
                 if (code != 200) {
-                    throw IOException("Server response $code")
+                    error = "$code"
+                    return;
                 }
 
                 // Fluxo de entrada para a requisição (resposta)

@@ -89,7 +89,7 @@ class SignUpActivity : AppCompatActivity() {
 
             pd.dismiss()
 
-            if (error.length >= 0) {
+            if (!error.isEmpty()) {
                 when (error) {
                     "400" -> Toast.makeText(context, "Informações inválidas!", Toast.LENGTH_SHORT).show()
                     "409" -> Toast.makeText(context, "Email já em uso!", Toast.LENGTH_SHORT).show()
