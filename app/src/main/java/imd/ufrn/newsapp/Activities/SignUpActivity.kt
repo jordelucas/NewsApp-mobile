@@ -39,7 +39,7 @@ class SignUpActivity : AppCompatActivity() {
         btnLogin = findViewById(R.id.btnSignUpProximo)
 
         btnVoltar.setOnClickListener {
-            toInitiation()
+            toInvitation()
         }
 
         btnLogin.setOnClickListener {
@@ -47,8 +47,8 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    fun toInitiation() {
-        val intent = Intent(this, InitiationActivity::class.java)
+    fun toInvitation() {
+        val intent = Intent(this, ConviteSignUpActivity::class.java)
         startActivity(intent)
     }
 
