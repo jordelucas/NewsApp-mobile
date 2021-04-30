@@ -1,7 +1,9 @@
 package imd.ufrn.newsapp
 
+import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
+import android.widget.Toast
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.*
@@ -9,6 +11,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 class HTTPGetNewsList(
+        private var context: Context,
         private var listener: UpdateNewsListListener,
         private var urlAddress: String,
         private var userId: String,
@@ -17,10 +20,15 @@ class HTTPGetNewsList(
 
     private var TAG = "mainTag"
     private var response = String()
-    // private var newsMList = mutableListOf<News>()
+    private var error = String()
 
     override fun onPostExecute(result: Unit?) {
         super.onPostExecute(result)
+
+        if(!error.isEmpty()) {
+            Toast.makeText(context, "Opa! Há algo de errado", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         Log.i(TAG, response)
         val responseArray = JSONArray(response)
@@ -57,7 +65,8 @@ class HTTPGetNewsList(
             // Verificar conexão bem sucedida
             val code = urlConnection.responseCode
             if (code != 200) {
-                throw IOException("Server response $code")
+                error = "$code"
+                return
             }
 
             // Fluxo de entrada para a requisição (resposta)

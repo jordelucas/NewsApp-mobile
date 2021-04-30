@@ -66,6 +66,7 @@ class LoginActivity : AppCompatActivity() {
 
         private var error = String()
         private var response = String()
+        private var error = String()
 
         override fun onPreExecute() {
             super.onPreExecute()
@@ -81,16 +82,15 @@ class LoginActivity : AppCompatActivity() {
 
             pd.dismiss()
 
-            if (!error.isEmpty()) {
-                Log.i(TAG, "oi")
-                when (error) {
-                    "400" -> Toast.makeText(context, "Campos obrigatórios incorretos ou não informados!", Toast.LENGTH_SHORT).show()
-                    "404" -> Toast.makeText(context, "Credenciais inválidas!", Toast.LENGTH_SHORT).show()
-                    else -> {
-                        Toast.makeText(context, "Há algo de errado!", Toast.LENGTH_SHORT).show()
-                    }
+            if(!error.isEmpty()) {
+                val msg: String
+                msg = when(error) {
+                    "400" -> "Campos obrigatórios incorretos ou não informados!"
+                    "404" -> "Usuário não encontrado"
+                    else -> "Há algo de errado!"
                 }
-                return;
+                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+                return
             }
 
             Log.i(TAG, response)
@@ -137,7 +137,7 @@ class LoginActivity : AppCompatActivity() {
                 val code = urlConnection.responseCode
                 if (code != 200) {
                     error = "$code"
-                    return;
+                    return
                 }
 
                 // Fluxo de entrada para a requisição (resposta)
