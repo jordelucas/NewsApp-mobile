@@ -5,6 +5,7 @@ import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.LinearLayout
 import android.widget.ListView
 import imd.ufrn.newsapp.News
 import imd.ufrn.newsapp.NewsAdapter
@@ -16,6 +17,8 @@ import java.net.URL
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var layLogout: LinearLayout
 
     private lateinit var adapter: NewsAdapter
     private var newsList = mutableListOf<News>()
@@ -34,6 +37,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        layLogout = findViewById(R.id.content_logout)
+
+        layLogout.setOnClickListener {
+            finish()
+        }
 
         adapter = NewsAdapter(this, newsList)
         val lvNews: ListView = findViewById(R.id.lvNews)
