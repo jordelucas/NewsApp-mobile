@@ -1,36 +1,69 @@
 package imd.ufrn.newsapp.Activities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import android.widget.LinearLayout
 import android.widget.ListView
-import imd.ufrn.newsapp.News
-import imd.ufrn.newsapp.NewsAdapter
-import imd.ufrn.newsapp.R
-import java.util.*
+import androidx.appcompat.app.AppCompatActivity
+import imd.ufrn.newsapp.*
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : AppCompatActivity(), HTTPGetNewsList.UpdateNewsListListener {
+
+    private lateinit var layLogout: LinearLayout
 
     private lateinit var adapter: NewsAdapter
     private var newsList = mutableListOf<News>()
-
-
-    val newsListTest = mutableListOf(
-            News("Notícia 1", "Este é o corpo da primeira notícia", Date(), 1),
-            News("Notícia 2", "Este é o corpo da segunda notícia", Date(), 1),
-            News("Notícia 3", "Este é o corpo da terceira notícia", Date(), 1),
-            News("Notícia 4", "Este é o corpo da quarta notícia", Date(), 1),
-            News("Notícia 5", "Este é o corpo da quinta notícia", Date(), 1),
-            News("Notícia 6", "Este é o corpo da sexta notícia", Date(), 1),
-            News("Notícia 7", "Este é o corpo da sétima notícia", Date(), 1)
-    )
+    private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        adapter = NewsAdapter(this, newsListTest)
+        layLogout = findViewById(R.id.content_logout)
+
+        layLogout.setOnClickListener {
+            logout()
+        }
+
+        val userId = intent.getStringExtra("id")
+        val userName = intent.getStringExtra("name")
+        user = User(userId as String, userName as String)
+
+        adapter = NewsAdapter(this, newsList)
         val lvNews: ListView = findViewById(R.id.lvNews)
         lvNews.adapter = adapter
 
+        lvNews.setOnItemClickListener {
+            parent, view, position, id ->
+            // Toast.makeText(this, "$position: Funciona!", Toast.LENGTH_SHORT).show()
+            val task = HTTPGetNewsById(
+                    this,
+                    "http://10.0.2.2:3333/news/",
+                    newsList.get(position).id,
+                    user.id
+            )
+            task.execute()
+        }
+        val task = HTTPGetNewsList(
+                this,
+                "http://10.0.2.2:3333/user/",
+                user.id,
+                newsList
+        )
+        task.execute()
+
+    }
+
+    override fun updateNewsList(newsMList: MutableList<News>) {
+        // adapter.updateList(newsMList)
+        adapter.notifyDataSetChanged()
+    }
+
+    fun logout() {
+        val intent = Intent(this, InitiationActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent)
     }
 }
