@@ -49,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
 
         val task = HTTPAuthenticationTask(
                 this,
-                "http://$10.0.0.103/authentication",
+                "http://10.0.0.103:3333/authentication",
                 edTxtEmail.text.toString(),
                 edTxtSenha.text.toString()
         )
@@ -65,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
         AsyncTask<Int, Int, Unit>() {
 
         private lateinit var pd: ProgressDialog
-        private var response =  String()
+        private var response = String()
 
         override fun onPreExecute() {
             super.onPreExecute()

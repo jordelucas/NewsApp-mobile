@@ -12,14 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NewsApp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.InitiationActivity" />
-        <activity android:name=".Activities.ConviteSignUpActivity" />
-        <activity android:name=".Activities.SignUpActivity">
+        <activity android:name=".Activities.InitiationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".Activities.ConviteSignUpActivity" />
+        <activity android:name=".Activities.SignUpActivity">
         </activity>
         <activity android:name=".Activities.LoginActivity" />
         <activity android:name=".Activities.NewsActivity" />

@@ -7,11 +7,16 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import java.util.*
+import kotlin.collections.ArrayList
 
 class NewsAdapter(
     private var context: Context,
     private var newsList: List<News>
     ) : BaseAdapter() {
+
+    fun updateList(newsMList: MutableList<News>) {
+        newsList = newsMList
+    }
 
     override fun getCount(): Int = newsList.size
 
@@ -37,8 +42,8 @@ class NewsAdapter(
         }
 
         holder.txtTitulo.text = news.titulo
-        holder.txtData.text = news.data.toString()
-        holder.txtTempo.text = news.tempo.toString() + "min"
+        // holder.txtData.text = news.data.toString()
+        // holder.txtTempo.text = news.tempo.toString() + "min"
 
         return row
     }
