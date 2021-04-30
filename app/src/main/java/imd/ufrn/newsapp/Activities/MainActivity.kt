@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.ListView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import imd.ufrn.newsapp.*
 
@@ -11,6 +12,7 @@ import imd.ufrn.newsapp.*
 class MainActivity : AppCompatActivity(), HTTPGetNewsList.UpdateNewsListListener {
 
     private lateinit var layLogout: LinearLayout
+    private lateinit var txtName: TextView
 
     private lateinit var adapter: NewsAdapter
     private var newsList = mutableListOf<News>()
@@ -21,6 +23,7 @@ class MainActivity : AppCompatActivity(), HTTPGetNewsList.UpdateNewsListListener
         setContentView(R.layout.activity_main)
 
         layLogout = findViewById(R.id.content_logout)
+        txtName = findViewById(R.id.txtMainNome)
 
         layLogout.setOnClickListener {
             logout()
@@ -29,6 +32,8 @@ class MainActivity : AppCompatActivity(), HTTPGetNewsList.UpdateNewsListListener
         val userId = intent.getStringExtra("id")
         val userName = intent.getStringExtra("name")
         user = User(userId as String, userName as String)
+
+        txtName.setText(user.name)
 
         adapter = NewsAdapter(this, newsList)
         val lvNews: ListView = findViewById(R.id.lvNews)
