@@ -15,10 +15,18 @@ class NewsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
 
+        findViewById<TextView>(R.id.txtMainNome)
+                .text = intent.getStringExtra("author")
         findViewById<TextView>(R.id.txtNewsViewTitulo)
                 .text = intent.getStringExtra("title")
         findViewById<TextView>(R.id.txtNewsViewTexto)
                 .text = intent.getStringExtra("description")
+        findViewById<TextView>(R.id.txtNewsDate)
+                .text = intent.getStringExtra("date")
+        findViewById<TextView>(R.id.txtNewsTime)
+                .text = intent.getStringExtra("time") + " min read"
+        findViewById<TextView>(R.id.txtNewsViews)
+                .text = intent.getStringExtra("views") + " visualizações"
 
         val userId = intent.getStringExtra("userId")
         val newsId = intent.getStringExtra("id")
