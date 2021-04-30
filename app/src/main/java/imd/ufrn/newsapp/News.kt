@@ -6,7 +6,7 @@ class News (
     var id: String,
     var titulo: String,
     var texto: String?,
-    // var data: String,
+    var date: String,
     var autor: String?
     //var tempo: Int?
 )

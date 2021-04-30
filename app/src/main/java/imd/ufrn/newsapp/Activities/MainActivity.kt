@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity(), HTTPGetNewsList.UpdateNewsListListener
         val task = HTTPGetNewsList(
                 this,
                 this,
-                "http://10.0.0.103:3333/user/",
+                "http://10.0.2.2:3333/user/",
                 user.id,
                 newsList
         )
